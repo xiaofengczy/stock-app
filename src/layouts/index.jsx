@@ -26,7 +26,7 @@ function Index(props) {
       <Slider />
       <Layout>
         <Header title={title} />
-        {children}
+        <div style={{ minHeight: '100vh' }}>{children}</div>
         <Footer />
       </Layout>
     </Layout>
