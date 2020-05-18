@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
-import { Layout, Menu } from 'antd';
+import React  from 'react';
+import { Layout } from 'antd';
 import Login from '@/pages/login';
 import Slider from './components/Slider';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { Link } from 'umi';
 
 function Index(props) {
   let children = props.children || {};
@@ -19,7 +18,6 @@ function Index(props) {
       title = route.title;
     }
   });
-  console.log(title);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>

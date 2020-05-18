@@ -21,6 +21,16 @@ export default defineConfig({
           component: 'stockpool',
           title: '股票池',
         },
+        {
+          path: '/eventdriven',
+          component: 'eventdriven',
+          title: '事件驱动',
+        },
+        {
+          path: '/trader/add',
+          component: 'trader/add',
+          title: '今日操盘',
+        },
       ],
     },
   ],
