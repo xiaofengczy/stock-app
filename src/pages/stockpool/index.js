@@ -1,8 +1,6 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Form, Input, Button, Table, Space, Tag } from 'antd';
 import styles from './index.less';
-
-const { Header, Content, Footer, Sider } = Layout;
+import { Button, Form, Input, Space, Table } from 'antd';
 
 const columns = [
   {
@@ -107,35 +105,40 @@ const data = [
     age: 42,
     address: 'London No. 1 Lake Park',
     tags: ['loser'],
-  },{
+  },
+  {
     key: '2',
     name: 'Jim Green',
     age: 42,
     address: 'London No. 1 Lake Park',
     tags: ['loser'],
   },
-  ,{
+  ,
+  {
     key: '2',
     name: 'Jim Green',
     age: 42,
     address: 'London No. 1 Lake Park',
     tags: ['loser'],
   },
-  ,{
+  ,
+  {
     key: '2',
     name: 'Jim Green',
     age: 42,
     address: 'London No. 1 Lake Park',
     tags: ['loser'],
   },
-  ,{
+  ,
+  {
     key: '2',
     name: 'Jim Green',
     age: 42,
     address: 'London No. 1 Lake Park',
     tags: ['loser'],
   },
-  ,{
+  ,
+  {
     key: '2',
     name: 'Jim Green',
     age: 42,
@@ -144,35 +147,43 @@ const data = [
   },
 ];
 
-function StockContent(props) {
+export default () => {
   return (
-    <Content style={{ margin: '0 16px' }}>
-      {/*<Breadcrumb style={{ margin: '16px 0' }}>*/}
-      {/*  <Breadcrumb.Item>User</Breadcrumb.Item>*/}
-      {/*  <Breadcrumb.Item>Bill</Breadcrumb.Item>*/}
-      {/*  <Breadcrumb.Item>222</Breadcrumb.Item>*/}
-      {/*</Breadcrumb>*/}
-      <div className={styles['site-layout-background']} style={{ padding: 24,marginTop:20}}>
-        <Button type="primary"  style={{ marginBottom: 24}}>
-          新增
-        </Button>
-        <Form layout="inline" className={styles['search-form']}>
-          <Form.Item label="股票名称" name="name" className={styles['search-style']} colon={false}>
-            <Input/>
-          </Form.Item>
-          <Form.Item label="股票代码" name="code" className={styles['search-style']} colon={false}>
-            <Input/>
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              搜索
-            </Button>
-          </Form.Item>
-        </Form>
-        <Table columns={columns} dataSource={data} style={{marginTop:"30px"}}/>
-      </div>
-    </Content>
+    <div
+      className={styles['site-layout-background']}
+      style={{ padding: 24, marginTop: 20 }}
+    >
+      <Button type="primary" style={{ marginBottom: 24 }}>
+        新增
+      </Button>
+      <Form layout="inline" className={styles['search-form']}>
+        <Form.Item
+          label="股票名称"
+          name="name"
+          className={styles['search-style']}
+          colon={false}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="股票代码"
+          name="code"
+          className={styles['search-style']}
+          colon={false}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            搜索
+          </Button>
+        </Form.Item>
+      </Form>
+      <Table
+        columns={columns}
+        dataSource={data}
+        style={{ marginTop: '30px' }}
+      />
+    </div>
   );
-}
-
-export default StockContent;
+};
