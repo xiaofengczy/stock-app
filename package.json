@@ -22,6 +22,7 @@
   "dependencies": {
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.2.0-beta.6",
+    "dva-model-extend": "^0.1.2",
     "lint-staged": "^10.0.7",
     "prettier": "^1.19.1",
     "react": "^16.12.0",

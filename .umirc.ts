@@ -34,6 +34,12 @@ export default defineConfig({
       ],
     },
   ],
+  proxy: {
+    '/stock-service': {
+      changeOrigin: true,
+      target: 'http://localhost:8088',
+    },
+  },
   alias: {
     '@': resolve(__dirname, './src'),
     '@utils': resolve(__dirname, './src/utils'),
@@ -43,5 +49,6 @@ export default defineConfig({
     '@services': resolve(__dirname, './src/services'),
     '@components': resolve(__dirname, './src/components'),
     '@layouts': resolve(__dirname, './src/layouts'),
+    '@action': resolve(__dirname, './src/action'),
   },
 });

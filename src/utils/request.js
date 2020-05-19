@@ -41,19 +41,9 @@ export default async function request(url, params) {
     'X-Requested-With': 'XMLHttpRequest',
   };
   newParams.mode = 'cors';
-
   const response = await fetch(`${SERVICE_PRE_FIX}${url}`, newParams);
   checkStatus(response);
   let res = await response.json();
-  if (res && res.code === 'REC008') {
-    if (history.location && history.location.pathname === '/joblist/detail') {
-      history.push('/', {
-        detailId: history.location.query.id,
-      });
-    } else {
-      history.push('/');
-    }
-  }
   return res;
 }
 

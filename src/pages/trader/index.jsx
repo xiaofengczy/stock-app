@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { Component, useEffect } from 'react';
 import styles from './index.less';
 import { Button, Form, Input, Space, Table } from 'antd';
-import { getTableColumns ,getFilterData} from '../methods';
+import { getTableColumns, getFilterData } from '../methods';
 import FormLister from '@components/form/FormLister';
+import { connect } from 'dva';
+import { doTest } from '../../action/stockAction';
+
 const columns = [
   {
     title: '名字',
@@ -146,46 +149,56 @@ const data = [
     tags: ['loser'],
   },
 ];
-export default props => {
-  function onAdd() {
-    props.history.push('/trader/add')
+export default
+@connect(() => {}, {
+  doTest,
+})
+class Trader extends Component {
+  render() {
+    const { history } = this.props;
+
+    function onAdd() {
+      doTest();
+      // history.push('/trader/add')
+    }
+
+    return (
+      <div
+        className={styles['site-layout-background']}
+        style={{ padding: 24, marginTop: 20 }}
+      >
+        <Button type="primary" style={{ marginBottom: 24 }} onClick={onAdd}>
+          新增
+        </Button>
+        <Form layout="inline" className={styles['search-form']}>
+          <Form.Item
+            label="股票名称"
+            name="name"
+            className={styles['search-style']}
+            colon={false}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="股票代码"
+            name="code"
+            className={styles['search-style']}
+            colon={false}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              搜索
+            </Button>
+          </Form.Item>
+        </Form>
+        <Table
+          columns={columns}
+          dataSource={data}
+          style={{ marginTop: '30px' }}
+        />
+      </div>
+    );
   }
-  return (
-    <div
-      className={styles['site-layout-background']}
-      style={{ padding: 24, marginTop: 20 }}
-    >
-      <Button type="primary" style={{ marginBottom: 24 }} onClick={onAdd}>
-        新增
-      </Button>
-      <Form layout="inline" className={styles['search-form']}>
-        <Form.Item
-          label="股票名称"
-          name="name"
-          className={styles['search-style']}
-          colon={false}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="股票代码"
-          name="code"
-          className={styles['search-style']}
-          colon={false}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            搜索
-          </Button>
-        </Form.Item>
-      </Form>
-      <Table
-        columns={columns}
-        dataSource={data}
-        style={{ marginTop: '30px' }}
-      />
-    </div>
-  );
-};
+}
