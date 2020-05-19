@@ -4,7 +4,7 @@ import { Button, Form, Input, Space, Table } from 'antd';
 import { getTableColumns, getFilterData } from '../methods';
 import FormLister from '@components/form/FormLister';
 import { connect } from 'dva';
-import { doTest } from '../../action/stockAction';
+import { doTest } from '@action/stockAction';
 
 const columns = [
   {
@@ -158,8 +158,7 @@ class Trader extends Component {
     const { history } = this.props;
 
     function onAdd() {
-      doTest();
-      // history.push('/trader/add')
+      history.push('/trader/add')
     }
 
     return (

@@ -6,12 +6,11 @@ import { addTrader } from '@action/stockAction';
 
 export default connect(() => {}, {
   addTrader,
-})(function Index(props) {
+})(function Index({addTrader}) {
   function onFinish(values) {
     console.log(values);
     addTrader(values);
   }
-
   return (
     <Form
       layout="horizontal"
