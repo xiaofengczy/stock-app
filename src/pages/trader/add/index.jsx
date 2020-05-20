@@ -1,22 +1,55 @@
-import React, { useEffect } from 'react';
+import React, { useEffect ,useState} from 'react';
 import styles from '../index.less';
-import { Button, Form, Input, Space, Table } from 'antd';
+import { Button, Form, Input, Space, Table,DatePicker } from 'antd';
+import moment from 'moment';
 import { connect } from 'dva';
 import { addTrader } from '@action/stockAction';
 
 export default connect(() => {}, {
   addTrader,
 })(function Index({addTrader}) {
+  const [inputDate,setInputDate] = useState();
+  const [traderTime,setTraderTine] = useState();
+
   function onFinish(values) {
-    console.log(values);
+    values['inputTime'] = inputDate;
+    values['traderTime']=traderTime;
     addTrader(values);
   }
+
+  function onTraderChange(date, dateString) {
+    setTraderTine(dateString)
+  }
+
+  function onInputChange(date, dateString) {
+    setInputDate(dateString)
+  }
+
   return (
     <Form
       layout="horizontal"
       className={styles['trade-form']}
       onFinish={onFinish}
     >
+      <Form.Item
+        label="操盘时间"
+        name="traderTime"
+        className={styles['search-style']}
+        colon={true}
+        rules={[{ required: true, message: '请输入操盘时间' }]}
+      >
+        <DatePicker format="YYYY-MM-DD"  className={styles['time-input']} onChange={onTraderChange}/>
+      </Form.Item>
+      <Form.Item
+        label="录入时间"
+        name="inputTime"
+        className={styles['ssearch-style']}
+        colon={true}
+        rules={[{ required: true, message: '请输入录入时间' }]}
+      >
+        <DatePicker
+          format="YYYY-MM-DD" className={styles['time-input']} onChange={onInputChange}/>
+      </Form.Item>
       <Form.Item
         label="题材挖掘"
         name="news"
@@ -35,7 +68,7 @@ export default connect(() => {}, {
       </Form.Item>
       <Form.Item
         label="操作建议"
-        name="actionAuggest"
+        name="tradersSuggested"
         className={styles['search-style']}
         colon={true}
       >
