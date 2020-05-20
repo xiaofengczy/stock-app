@@ -7,14 +7,14 @@ import { addTrader } from '@action/stockAction';
 
 export default connect(() => {}, {
   addTrader,
-})(function Index({addTrader}) {
+})(function Index(props,{addTrader}) {
   const [inputDate,setInputDate] = useState();
   const [traderTime,setTraderTine] = useState();
 
   function onFinish(values) {
     values['inputTime'] = inputDate;
     values['traderTime']=traderTime;
-    addTrader(values);
+    addTrader(values).then(props.history.push("/trader"));
   }
 
   function onTraderChange(date, dateString) {

@@ -16,7 +16,11 @@ export default modelExtend(basicModel, {
 
     *addTrader(action, { call, put }) {
       const rest = yield call(stockService.addTrader, action.payload);
-      console.log(rest);
+      return rest;
+    },
+
+    *listTrader(action, { call, put }) {
+      const rest = yield call(stockService.listTrader, action.payload);
       return rest;
     },
   },

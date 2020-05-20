@@ -6,8 +6,14 @@ export async function doTest(params) {
   return await get(`/doTest`, params);
 }
 
-//获取图形验证码
+//保存今日操盘
 export async function addTrader(params) {
   console.log(params);
   return await post(`/addTrader`, params);
+}
+
+
+//获取今日操盘列表
+export async function listTrader(params) {
+  return await post(`/listTrader`, params);
 }

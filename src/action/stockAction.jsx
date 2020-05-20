@@ -9,3 +9,9 @@ export const addTrader = params => ({
   type: 'stock/addTrader',
   payload: params,
 });
+
+export const listTrader = params => ({
+  type: 'stock/listTrader',
+  payload: params,
+});
+
