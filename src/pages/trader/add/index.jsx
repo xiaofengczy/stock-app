@@ -1,28 +1,29 @@
-import React, { useEffect ,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../index.less';
-import { Button, Form, Input, Space, Table,DatePicker } from 'antd';
+import { Button, Form, Input, Space, Table, DatePicker } from 'antd';
 import moment from 'moment';
 import { connect } from 'dva';
 import { addTrader } from '@action/stockAction';
 
 export default connect(() => {}, {
   addTrader,
-})(function Index(props,{addTrader}) {
-  const [inputDate,setInputDate] = useState();
-  const [traderTime,setTraderTine] = useState();
+})(function Index(props) {
+  const [inputDate, setInputDate] = useState();
+  const [traderTime, setTraderTine] = useState();
+  const { addTrader } = props;
 
   function onFinish(values) {
     values['inputTime'] = inputDate;
-    values['traderTime']=traderTime;
-    addTrader(values).then(props.history.push("/trader"));
+    values['traderTime'] = traderTime;
+    addTrader(values).then(props.history.push('/trader'));
   }
 
   function onTraderChange(date, dateString) {
-    setTraderTine(dateString)
+    setTraderTine(dateString);
   }
 
   function onInputChange(date, dateString) {
-    setInputDate(dateString)
+    setInputDate(dateString);
   }
 
   return (
@@ -32,13 +33,26 @@ export default connect(() => {}, {
       onFinish={onFinish}
     >
       <Form.Item
+        label="今日操盘"
+        name="title"
+        className={styles['search-style']}
+        colon={true}
+        rules={[{ required: true, message: '请输入今日操盘' }]}
+      >
+        <Input className={styles['time-input']} maxLength={30} />
+      </Form.Item>
+      <Form.Item
         label="操盘时间"
         name="traderTime"
         className={styles['search-style']}
         colon={true}
         rules={[{ required: true, message: '请输入操盘时间' }]}
       >
-        <DatePicker format="YYYY-MM-DD"  className={styles['time-input']} onChange={onTraderChange}/>
+        <DatePicker
+          format="YYYY-MM-DD"
+          className={styles['time-input']}
+          onChange={onTraderChange}
+        />
       </Form.Item>
       <Form.Item
         label="录入时间"
@@ -48,7 +62,10 @@ export default connect(() => {}, {
         rules={[{ required: true, message: '请输入录入时间' }]}
       >
         <DatePicker
-          format="YYYY-MM-DD" className={styles['time-input']} onChange={onInputChange}/>
+          format="YYYY-MM-DD"
+          className={styles['time-input']}
+          onChange={onInputChange}
+        />
       </Form.Item>
       <Form.Item
         label="题材挖掘"

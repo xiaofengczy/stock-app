@@ -6,6 +6,11 @@ import { listTrader } from '@action/stockAction';
 
 const columns = [
   {
+    title: '今日操盘',
+    dataIndex: 'title',
+    key: 'title',
+  },
+  {
     title: '操盘时间',
     dataIndex: 'traderTime',
     key: 'traderTime',
@@ -27,12 +32,14 @@ const columns = [
     ),
   },
 ];
-export default connect(({loading}) => {
-  loading
-}, {
-  listTrader,
-})
-(function Trader(props) {
+export default connect(
+  ({ loading }) => {
+    loading;
+  },
+  {
+    listTrader,
+  },
+)(function Trader(props) {
   const { history, listTrader } = props;
   const [tableData, setTableData] = useState();
 
@@ -40,14 +47,16 @@ export default connect(({loading}) => {
     listTrader({}).then(res => {
       let resData = res.data;
       setTableData(
-        resData && resData.map((data) => {
-          return (
-            {
+        resData &&
+          resData.map(data => {
+            return {
+              title: data.title,
               key: data.id,
               traderTime: data.traderTime,
               inputTime: data.inputTime,
-            });
-        }));
+            };
+          }),
+      );
     });
   });
 
@@ -70,7 +79,7 @@ export default connect(({loading}) => {
           className={styles['search-style']}
           colon={false}
         >
-          <Input/>
+          <Input />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
