@@ -30,7 +30,6 @@ const qsParse = params => {
   } else {
     search = '';
   }
-
   return qs.parse(search, { ignoreQueryPrefix: true });
 };
 
@@ -51,4 +50,4 @@ const isObject = obj => {
   return obj && obj instanceof Object && !(obj instanceof Array) && Object.keys(obj).length;
 };
 
-export {isArray,qsString}
+export {isArray,qsString,qsParse,isObject}

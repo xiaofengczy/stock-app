@@ -31,6 +31,16 @@ export default defineConfig({
           component: 'trader/add',
           title: '今日操盘',
         },
+        {
+          path: '/trader/edit',
+          component: 'trader/edit',
+          title: '操盘编辑',
+        },
+        {
+          path: '/trader/detail',
+          component: 'trader/detail',
+          title: '操盘详情',
+        },
       ],
     },
   ],

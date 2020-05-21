@@ -19,5 +19,5 @@ export async function listTrader(params) {
 
 //获取今日操盘
 export async function getStock(params) {
-  return await post(`/getStock?id=`+params['id'], null);
+  return await get(`/getStock/`+params['id'], null);
 }

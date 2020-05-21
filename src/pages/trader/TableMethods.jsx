@@ -1,4 +1,5 @@
 import { Button, Form, Input, Space, Table } from 'antd';
+import { Link } from 'umi';
 
 const getColumnFields = ({onEdit,onDetail , onDelete}) => {
   const base_column = [

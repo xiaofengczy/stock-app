@@ -26,7 +26,6 @@ export default modelExtend(basicModel, {
 
     *getStock(action, { call, put }) {
       const rest = yield call(stockService.getStock, action.payload);
-      console.log(rest);
       return rest;
     },
   },

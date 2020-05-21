@@ -32,13 +32,14 @@ export default connect(
         }),
       );
     });
-  });
+  },[]);
 
   function onAdd() {
     history.push('/trader/add');
   }
 
   function onEdit(record) {
+    console.log("edit");
     let params = {
       id: record.key
     };
@@ -46,6 +47,7 @@ export default connect(
   }
 
   function onDetail(record) {
+    console.log("detail");
     let params = {
       id: record.key
     };
