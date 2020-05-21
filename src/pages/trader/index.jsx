@@ -3,35 +3,9 @@ import styles from './index.less';
 import { Button, Form, Input, Space, Table } from 'antd';
 import { connect } from 'dva';
 import { listTrader } from '@action/stockAction';
+import { getColumnFields } from './TableMethods';
+import { qsString } from '@utils/utils';
 
-const columns = [
-  {
-    title: '今日操盘',
-    dataIndex: 'title',
-    key: 'title',
-  },
-  {
-    title: '操盘时间',
-    dataIndex: 'traderTime',
-    key: 'traderTime',
-  },
-  {
-    title: '录入时间',
-    dataIndex: 'inputTime',
-    key: 'inputTime',
-  },
-  {
-    title: '操作',
-    key: 'action',
-    render: (text, record) => (
-      <Space size="middle">
-        <a>详情</a>
-        <a>编辑</a>
-        <a>删除</a>
-      </Space>
-    ),
-  },
-];
 export default connect(
   ({ loading }) => {
     loading;
@@ -48,20 +22,38 @@ export default connect(
       let resData = res.data;
       setTableData(
         resData &&
-          resData.map(data => {
-            return {
-              title: data.title,
-              key: data.id,
-              traderTime: data.traderTime,
-              inputTime: data.inputTime,
-            };
-          }),
+        resData.map(data => {
+          return {
+            title: data.title,
+            key: data.id,
+            traderTime: data.traderTime,
+            inputTime: data.inputTime,
+          };
+        }),
       );
     });
   });
 
   function onAdd() {
     history.push('/trader/add');
+  }
+
+  function onEdit(record) {
+    let params = {
+      id: record.key
+    };
+    return history.push(`/trader/edit?${qsString(params)}`);
+  }
+
+  function onDetail(record) {
+    let params = {
+      id: record.key
+    };
+    return history.push(`/trader/detail?${qsString(params)}`);
+  }
+
+  function onDelete(record) {
+    console.log(record);
   }
 
   return (
@@ -79,7 +71,7 @@ export default connect(
           className={styles['search-style']}
           colon={false}
         >
-          <Input />
+          <Input/>
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -88,7 +80,7 @@ export default connect(
         </Form.Item>
       </Form>
       <Table
-        columns={columns}
+        columns={getColumnFields({ onEdit, onDetail, onDelete })}
         dataSource={tableData}
         style={{ marginTop: '30px' }}
       />

@@ -113,4 +113,15 @@ const getFilterData = () => {
 //   return enterprise_id ? [...base_columns, ...ent_columns] : [...base_columns, ...pal_columns];
 // };
 
+function getColumns({onEdit,onDetail,onDelete,titleList}) {
+  titleList.map(item=>{
+    return {
+      title: item.name,
+      dataIndex: item.id,
+      key: item.id,
+    }
+  })
+
+}
+
 export { getFilterData };
