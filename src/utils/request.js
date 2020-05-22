@@ -55,3 +55,11 @@ export async function get(path, params) {
 export async function post(path, params) {
   return request(path, { method: 'POST', body: params });
 }
+
+export async function del(path, params, options) {
+  return request(path, { method: 'DELETE', body: params }, options);
+}
+
+export async function put(path, params, options) {
+  return request(path, { method: 'PUT', body: params }, options);
+}

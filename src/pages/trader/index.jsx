@@ -2,9 +2,10 @@ import React, { Component, useEffect, useState } from 'react';
 import styles from './index.less';
 import { Button, Form, Input, Space, Table } from 'antd';
 import { connect } from 'dva';
-import { listTrader } from '@action/stockAction';
+import { listTrader, deleteTrader } from '@action/stockAction';
 import { getColumnFields } from './TableMethods';
 import { qsString } from '@utils/utils';
+import * as moment from 'moment';
 
 export default connect(
   ({ loading }) => {
@@ -12,9 +13,10 @@ export default connect(
   },
   {
     listTrader,
+    deleteTrader,
   },
 )(function Trader(props) {
-  const { history, listTrader } = props;
+  const { history, listTrader, deleteTrader } = props;
   const [tableData, setTableData] = useState();
 
   useEffect(() => {
@@ -22,41 +24,42 @@ export default connect(
       let resData = res.data;
       setTableData(
         resData &&
-        resData.map(data => {
-          return {
-            title: data.title,
-            key: data.id,
-            traderTime: data.traderTime,
-            inputTime: data.inputTime,
-            marketAnalysis:data.marketAnalysis
-          };
-        }),
+          resData.map(data => {
+            return {
+              title: data.title,
+              key: data.id,
+              traderTime: moment(data.traderTime).format('YYYY-MM-DD'),
+              inputTime: data.inputTime
+                ? moment(data.inputTime).format('YYYY-MM-DD')
+                : null,
+              marketAnalysis: data.marketAnalysis,
+            };
+          }),
       );
     });
-  },[]);
+  }, []);
 
   function onAdd() {
     history.push('/trader/add');
   }
 
   function onEdit(record) {
-    console.log("edit");
+    console.log('edit');
     let params = {
-      id: record.key
+      id: record.key,
     };
     return history.push(`/trader/edit?${qsString(params)}`);
   }
 
   function onDetail(record) {
-    console.log("detail");
     let params = {
-      id: record.key
+      id: record.key,
     };
     return history.push(`/trader/detail?${qsString(params)}`);
   }
 
   function onDelete(record) {
-    console.log(record);
+    deleteTrader(record.key);
   }
 
   return (
@@ -74,7 +77,7 @@ export default connect(
           className={styles['search-style']}
           colon={false}
         >
-          <Input/>
+          <Input />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">

@@ -20,3 +20,7 @@ export const getStock = params => ({
   payload: params,
 });
 
+export const deleteTrader = params => ({
+  type: 'stock/deleteTrader',
+  payload: params,
+});

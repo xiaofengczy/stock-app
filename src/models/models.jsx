@@ -28,5 +28,10 @@ export default modelExtend(basicModel, {
       const rest = yield call(stockService.getStock, action.payload);
       return rest;
     },
+
+    *deleteTrader(action, { call, put }) {
+      const rest = yield call(stockService.deleteTrader, action.payload);
+      return rest;
+    },
   },
 });
