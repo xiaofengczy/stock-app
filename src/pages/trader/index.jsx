@@ -20,6 +20,7 @@ export default connect(
 )(function Trader(props) {
   const { history, listTrader, deleteTrader, traderListLoading } = props;
   const [tableData, setTableData] = useState();
+  const [status, setStatus] = useState(false);
 
   useEffect(() => {
     listTrader({}).then(res => {
@@ -39,7 +40,7 @@ export default connect(
           }),
       );
     });
-  }, []);
+  }, [status]);
 
   function onAdd() {
     history.push('/trader/add');
@@ -68,7 +69,10 @@ export default connect(
       okType: 'danger',
       cancelText: '取消',
       onOk() {
-        deleteTrader(key).then(() => listTrader({}));
+        deleteTrader(key).then(() => {
+          listTrader({});
+          setStatus(true);
+        });
       },
     });
   };
