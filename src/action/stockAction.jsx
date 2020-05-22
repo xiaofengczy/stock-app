@@ -15,3 +15,8 @@ export const listTrader = params => ({
   payload: params,
 });
 
+export const getStock = params => ({
+  type: 'stock/getStock',
+  payload: params,
+});
+

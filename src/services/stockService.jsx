@@ -12,8 +12,12 @@ export async function addTrader(params) {
   return await post(`/addTrader`, params);
 }
 
-
 //获取今日操盘列表
 export async function listTrader(params) {
   return await post(`/listTrader`, params);
+}
+
+//获取今日操盘
+export async function getStock(params) {
+  return await get(`/getStock/`+params['id'], null);
 }
