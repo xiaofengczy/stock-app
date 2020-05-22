@@ -1,22 +1,24 @@
 import React, { Component, useEffect, useState } from 'react';
 import styles from './index.less';
-import { Button, Form, Input, Space, Table } from 'antd';
+import { Button, Form, Input, Space, Table, Modal } from 'antd';
 import { connect } from 'dva';
 import { listTrader, deleteTrader } from '@action/stockAction';
 import { getColumnFields } from './TableMethods';
 import { qsString } from '@utils/utils';
 import * as moment from 'moment';
 
+const { confirm } = Modal;
+
 export default connect(
-  ({ loading }) => {
-    loading;
-  },
+  ({ loading }) => ({
+    traderListLoading: loading.effects['stock/listTrader'],
+  }),
   {
     listTrader,
     deleteTrader,
   },
 )(function Trader(props) {
-  const { history, listTrader, deleteTrader } = props;
+  const { history, listTrader, deleteTrader, traderListLoading } = props;
   const [tableData, setTableData] = useState();
 
   useEffect(() => {
@@ -44,7 +46,6 @@ export default connect(
   }
 
   function onEdit(record) {
-    console.log('edit');
     let params = {
       id: record.key,
     };
@@ -58,9 +59,19 @@ export default connect(
     return history.push(`/trader/detail?${qsString(params)}`);
   }
 
-  function onDelete(record) {
-    deleteTrader(record.key);
-  }
+  //删除
+  const onDelete = (record = {}) => {
+    const { key } = record || {};
+    confirm({
+      content: '确定删除？',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk() {
+        deleteTrader(key).then(() => listTrader({}));
+      },
+    });
+  };
 
   return (
     <div
@@ -89,6 +100,7 @@ export default connect(
         columns={getColumnFields({ onEdit, onDetail, onDelete })}
         dataSource={tableData}
         style={{ marginTop: '30px' }}
+        loading={traderListLoading}
       />
     </div>
   );
