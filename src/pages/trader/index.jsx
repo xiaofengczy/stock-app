@@ -22,25 +22,29 @@ export default connect(
   const [tableData, setTableData] = useState();
   const [status, setStatus] = useState(false);
 
-  useEffect(() => {
+  function onSearch(){
     listTrader({}).then(res => {
       let resData = res.data;
       setTableData(
         resData &&
-          resData.map(data => {
-            return {
-              title: data.title,
-              key: data.id,
-              traderTime: moment(data.traderTime).format('YYYY-MM-DD'),
-              inputTime: data.inputTime
-                ? moment(data.inputTime).format('YYYY-MM-DD')
-                : null,
-              marketAnalysis: data.marketAnalysis,
-            };
-          }),
+        resData.map(data => {
+          return {
+            title: data.title,
+            key: data.id,
+            traderTime: moment(data.traderTime).format('YYYY-MM-DD'),
+            inputTime: data.inputTime
+              ? moment(data.inputTime).format('YYYY-MM-DD')
+              : null,
+            marketAnalysis: data.marketAnalysis,
+          };
+        }),
       );
     });
-  }, [status]);
+  }
+
+  useEffect(() => {
+    onSearch();
+  }, []);
 
   function onAdd() {
     history.push('/trader/add');
@@ -69,10 +73,8 @@ export default connect(
       okType: 'danger',
       cancelText: '取消',
       onOk() {
-        deleteTrader(key).then(() => {
-          listTrader({});
-          setStatus(true);
-        });
+        deleteTrader(key).then(()=>onSearch());
+        ;
       },
     });
   };
@@ -92,7 +94,7 @@ export default connect(
           className={styles['search-style']}
           colon={false}
         >
-          <Input />
+          <Input/>
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -101,6 +103,7 @@ export default connect(
         </Form.Item>
       </Form>
       <Table
+        className={"table-style"}
         columns={getColumnFields({ onEdit, onDetail, onDelete })}
         dataSource={tableData}
         style={{ marginTop: '30px' }}

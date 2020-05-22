@@ -7,20 +7,25 @@ export async function doTest(params) {
 
 //保存今日操盘
 export async function addTrader(params) {
-  return post(`/addTrader`, params);
+  return await post(`/addTrader`, params);
 }
 
 //获取今日操盘列表
 export async function listTrader(params) {
-  return post(`/listTrader`, params);
+  return await post(`/listTrader`, params);
 }
 
 //获取今日操盘
 export async function getStock(params) {
-  return get(`/getStock/` + params['id'], {});
+  return await get(`/getStock/` + params['id'], {});
 }
 
 //删除今日操盘
 export async function deleteTrader(params) {
-  return del(`/delStock/` + params, {});
+  return await del(`/delStock/` + params, {});
+}
+
+//编辑今日操盘
+export async function editStock(params) {
+  return await post(`/editStock`, params);
 }

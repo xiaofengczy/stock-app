@@ -24,3 +24,8 @@ export const deleteTrader = params => ({
   type: 'stock/deleteTrader',
   payload: params,
 });
+
+export const editStock = params => ({
+  type: 'stock/editStock',
+  payload: params,
+});

@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react';
 import styles from '../index.less';
 import { Button, Form, Input, Space, Table, DatePicker } from 'antd';
 import { connect } from 'dva';
-import { getStock } from '@action/stockAction';
+import { getStock, editStock } from '@action/stockAction';
 import { qsParse } from '@utils/utils';
 import * as moment from 'moment';
 
-export default connect(() => {}, {
+export default connect((loading) => {
+  loading;
+}, {
   getStock,
+  editStock,
 })(function Index(props) {
   const [inputDate, setInputDate] = useState();
-  const [traderTime, setTraderTine] = useState();
-  const { getStock } = props;
+  const [traderTime, setTraderTime] = useState();
+  const { getStock, editStock } = props;
   const query = qsParse(props) || {};
   const { id = null } = query;
   const [stockDetail, setStockDetail] = useState({});
@@ -33,13 +36,15 @@ export default connect(() => {}, {
   }, []);
 
   function onFinish(values) {
+    values['traderTime'] = traderTime ? traderTime : moment(values['traderTime']).format('YYYY-MM-dd');
     values['inputTime'] = inputDate;
-    values['traderTime'] = traderTime;
-    // addTrader(values).then(props.history.push('/trader'));
+    values['traderId'] = id;
+    setTraderTime(undefined);
+    editStock(values).then(props.history.push('/trader'));
   }
 
   function onTraderChange(date, dateString) {
-    setTraderTine(dateString);
+    setTraderTime(dateString);
   }
 
   function onInputChange(date, dateString) {
@@ -60,7 +65,7 @@ export default connect(() => {}, {
         colon={true}
         rules={[{ required: true, message: '请输入今日操盘' }]}
       >
-        <Input className={styles['time-input']} maxLength={30} />
+        <Input className={styles['time-input']} maxLength={30}/>
       </Form.Item>
       <Form.Item
         label="操盘时间"
@@ -81,7 +86,7 @@ export default connect(() => {}, {
         className={styles['search-style']}
         colon={true}
       >
-        <Input.TextArea className={styles['trader-area']} />
+        <Input.TextArea className={styles['trader-area']}/>
       </Form.Item>
       <Form.Item
         label="题材挖掘"
@@ -89,7 +94,7 @@ export default connect(() => {}, {
         className={styles['search-style']}
         colon={true}
       >
-        <Input.TextArea className={styles['trader-area']} />
+        <Input.TextArea className={styles['trader-area']}/>
       </Form.Item>
       <Form.Item
         label="个股精选"
@@ -97,7 +102,7 @@ export default connect(() => {}, {
         className={styles['search-style']}
         colon={true}
       >
-        <Input.TextArea className={styles['trader-area']} />
+        <Input.TextArea className={styles['trader-area']}/>
       </Form.Item>
       <Form.Item
         label="操作建议"
@@ -105,7 +110,7 @@ export default connect(() => {}, {
         className={styles['search-style']}
         colon={true}
       >
-        <Input.TextArea className={styles['trader-area']} />
+        <Input.TextArea className={styles['trader-area']}/>
       </Form.Item>
       <Form.Item className={styles['trader-button']}>
         <Button type="primary" htmlType="submit">
