@@ -5,7 +5,8 @@ import moment from 'moment';
 import { connect } from 'dva';
 import { addTrader } from '@action/stockAction';
 
-export default connect(() => {}, {
+export default connect(() => {
+}, {
   addTrader,
 })(function Index(props) {
   const [inputDate, setInputDate] = useState();
@@ -39,7 +40,7 @@ export default connect(() => {}, {
         colon={true}
         rules={[{ required: true, message: '请输入今日操盘' }]}
       >
-        <Input className={styles['time-input']} maxLength={30} />
+        <Input className={styles['time-input']} maxLength={30}/>
       </Form.Item>
       <Form.Item
         label="操盘时间"
@@ -55,17 +56,12 @@ export default connect(() => {}, {
         />
       </Form.Item>
       <Form.Item
-        label="录入时间"
-        name="inputTime"
-        className={styles['ssearch-style']}
+        label="大盘分析"
+        name="marketAnalysis"
+        className={styles['search-style']}
         colon={true}
-        rules={[{ required: true, message: '请输入录入时间' }]}
       >
-        <DatePicker
-          format="YYYY-MM-DD"
-          className={styles['time-input']}
-          onChange={onInputChange}
-        />
+        <Input.TextArea className={styles['trader-area']}/>
       </Form.Item>
       <Form.Item
         label="题材挖掘"
@@ -73,7 +69,7 @@ export default connect(() => {}, {
         className={styles['search-style']}
         colon={true}
       >
-        <Input.TextArea className={styles['trader-area']} />
+        <Input.TextArea className={styles['trader-area']}/>
       </Form.Item>
       <Form.Item
         label="个股精选"
@@ -81,7 +77,7 @@ export default connect(() => {}, {
         className={styles['search-style']}
         colon={true}
       >
-        <Input.TextArea className={styles['trader-area']} />
+        <Input.TextArea className={styles['trader-area']}/>
       </Form.Item>
       <Form.Item
         label="操作建议"
@@ -89,7 +85,7 @@ export default connect(() => {}, {
         className={styles['search-style']}
         colon={true}
       >
-        <Input.TextArea className={styles['trader-area']} />
+        <Input.TextArea className={styles['trader-area']}/>
       </Form.Item>
       <Form.Item className={styles['trader-button']}>
         <Button type="primary" htmlType="submit">

@@ -28,6 +28,7 @@ export default connect(
             key: data.id,
             traderTime: data.traderTime,
             inputTime: data.inputTime,
+            marketAnalysis:data.marketAnalysis
           };
         }),
       );

@@ -9,6 +9,11 @@ const getColumnFields = ({onEdit,onDetail , onDelete}) => {
       key: 'title',
     },
     {
+      title: '大盘分析',
+      dataIndex: 'marketAnalysis',
+      key: 'marketAnalysis',
+    },
+    {
       title: '操盘时间',
       dataIndex: 'traderTime',
       key: 'traderTime',

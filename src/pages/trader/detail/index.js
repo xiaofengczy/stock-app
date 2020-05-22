@@ -20,7 +20,6 @@ export default connect(
   useEffect(() => {
     let params = { id: id };
     getStock(params).then(resp => {
-      console.log(resp.data);
       setStockDetail(resp.data);
     });
   },[]);
@@ -31,6 +30,7 @@ export default connect(
       <div>题材挖掘:{stockDetail['news']}</div>
       <div>个股精选:{stockDetail['stockAnalysis']}</div>
       <div>操作建议:{stockDetail['tradersSuggested']}</div>
+      <div>大盘分析:{stockDetail['marketAnalysis']}</div>
     </div>
   );
 });
