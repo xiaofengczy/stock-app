@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import styles from './index.less';
 import { Button, Form, Input, Space, Table, Modal, DatePicker } from 'antd';
 import { connect } from 'dva';
-import { listTrader, deleteTrader } from '@action/stockAction';
+import { listTrader, deleteTrader } from '@action/traderAction';
 import { getColumnFields } from './TableMethods';
 import { qsString } from '@utils/utils';
 import * as moment from 'moment';

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import { connect } from 'dva';
-import { getTrader } from '@action/stockAction';
+import { getTrader } from '@action/traderAction';
 import { qsParse } from '@utils/utils';
 import * as moment from 'moment';
 import {
