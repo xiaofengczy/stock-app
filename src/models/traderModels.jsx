@@ -9,27 +9,27 @@ export default modelExtend(basicModel, {
 
   effects: {
     *addTrader(action, { call, put }) {
-      const rest = yield call(stockService.addTrader, action.payload);
+      const rest = yield call(traderService.addTrader, action.payload);
       return rest;
     },
 
     *listTrader(action, { call, put }) {
-      const rest = yield call(stockService.listTrader, action.payload);
+      const rest = yield call(traderService.listTrader, action.payload);
       return rest;
     },
 
     *getTrader(action, { call, put }) {
-      const rest = yield call(stockService.getTrader, action.payload);
+      const rest = yield call(traderService.getTrader, action.payload);
       return rest;
     },
 
     *deleteTrader(action, { call, put }) {
-      const rest = yield call(stockService.deleteTrader, action.payload);
+      const rest = yield call(traderService.deleteTrader, action.payload);
       return rest;
     },
 
     *editTrader(action, { call, put }) {
-      const rest = yield call(stockService.editTrader, action.payload);
+      const rest = yield call(traderService.editTrader, action.payload);
       return rest;
     },
   },

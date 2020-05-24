@@ -6,9 +6,9 @@ import { getTrader, editTrader } from '@action/traderAction';
 import { qsParse } from '@utils/utils';
 import * as moment from 'moment';
 
-export default connect((loading) => {
-  loading;
-}, {
+export default connect(({ loading }) => ({
+  editLoading: loading.effects['/trader/edit'],
+}), {
   getTrader,
   editTrader,
 })(function Index(props) {
@@ -35,7 +35,7 @@ export default connect((loading) => {
   }, []);
 
   function onFinish(values) {
-    values['traderTime'] = traderTime ? traderTime : moment(values['traderTime']).format("YYYY-MM-DD").toString();
+    values['traderTime'] = traderTime ? traderTime : moment(values['traderTime']).format('YYYY-MM-DD').toString();
     values['inputTime'] = inputDate;
     values['traderId'] = id;
     setTraderTime(undefined);

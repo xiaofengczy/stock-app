@@ -9,8 +9,7 @@ import * as moment from 'moment';
 
 const { confirm } = Modal;
 
-export default connect(
-  ({ loading }) => ({
+export default connect(({ loading }) => ({
     traderListLoading: loading.effects['stock/listTrader'],
   }),
   {

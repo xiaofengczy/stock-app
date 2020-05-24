@@ -13,25 +13,20 @@ import {
   GithubOutlined,
 } from '@ant-design/icons';
 
-export default connect(
-  ({ loading }) => {
-    loading;
-  },
-  {
-    getTrader,
-  },
+export default connect(({ loading }) => ({ loading }),
+  { getTrader },
 )
 (function Index(props) {
   const { getTrader } = props;
   const query = qsParse(props) || {};
   const { id = null } = query;
   const [stockDetail, setStockDetail] = useState({});
-  const [traderTime,setTraderTme] = useState();
+  const [traderTime, setTraderTme] = useState();
   useEffect(() => {
     let params = { id: id };
     getTrader(params).then(resp => {
       setStockDetail(resp.data);
-      setTraderTme(moment(resp.data['traderTime']).format('YYYY-MM-DD').toString())
+      setTraderTme(moment(resp.data['traderTime']).format('YYYY-MM-DD').toString());
     });
   }, []);
   return (

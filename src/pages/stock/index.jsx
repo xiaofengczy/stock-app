@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
-import { Button, Form, Input, Table } from 'antd';
+import { Button, Form, Input, Table ,Modal} from 'antd';
 import { connect } from 'dva';
-import { listStock } from '@action/stockAction';
+import { listStock,deleteStock } from '@action/stockAction';
 import * as moment from 'moment';
 import { getColumnFields } from '../stock/TableMethods';
+import { qsString } from '@utils/utils';
+
+const { confirm } = Modal;
 
 export default connect(
   ({ loading }) => ({
@@ -12,9 +15,10 @@ export default connect(
   }),
   {
     listStock,
+    deleteStock
   },
 )(function Index(props) {
-  const { history, listStock, stockListLoading } = props;
+  const { history, listStock, stockListLoading ,deleteStock} = props;
   const [ stockList, setStockList ] = useState();
 
   function onAdd() {
@@ -28,6 +32,8 @@ export default connect(
         resData &&
         resData.map(data => {
           return {
+            key:data.id,
+            id:data.id,
             name: data.name,
             code: data.code,
             plate: data.plate,
@@ -43,19 +49,37 @@ export default connect(
     onSearch({});
   }, []);
 
-  function onEdit() {
-
+  function onAdd() {
+    history.push('/stock/add');
   }
 
-
-  function onDetail() {
-
+  function onEdit(record) {
+    let params = {
+      id: record.id,
+    };
+    return history.push(`/stock/edit?${qsString(params)}`);
   }
 
-
-  function onDelete() {
-
+  function onDetail(record) {
+    let params = {
+      id: record.id,
+    };
+    return history.push(`/stock/detail?${qsString(params)}`);
   }
+
+  //删除
+  const onDelete = (record = {}) => {
+    const { id } = record || {};
+    confirm({
+      content: '确定删除？',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk() {
+        deleteStock(id).then(() => onSearch({}));;
+      },
+    });
+  };
 
   return (
     <div
