@@ -17,8 +17,8 @@ export default defineConfig({
           title: '今日操盘',
         },
         {
-          path: '/stockpool',
-          component: 'stockpool',
+          path: '/stock',
+          component: 'stock',
           title: '股票池',
         },
         {
@@ -40,6 +40,21 @@ export default defineConfig({
           path: '/trader/detail',
           component: 'trader/detail',
           title: '操盘详情',
+        },
+        {
+          path: '/stock/add',
+          component: 'stock/add',
+          title: '新增股票',
+        },
+        {
+          path: '/stock/edit',
+          component: 'stock/edit',
+          title: '股票编辑',
+        },
+        {
+          path: '/stock/detail',
+          component: 'stock/detail',
+          title: '股票详情',
         },
       ],
     },

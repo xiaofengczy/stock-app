@@ -1,31 +1,24 @@
-export const doTest = () => ({
-  type: 'stock/doTest',
-  payload: {
-    test: 'hello web',
-  },
-});
-
 export const addTrader = params => ({
-  type: 'stock/addTrader',
+  type: 'trader/addTrader',
   payload: params,
 });
 
 export const listTrader = params => ({
-  type: 'stock/listTrader',
+  type: 'trader/listTrader',
   payload: params,
 });
 
 export const getTrader = params => ({
-  type: 'stock/getTrader',
+  type: 'trader/getTrader',
   payload: params,
 });
 
 export const deleteTrader = params => ({
-  type: 'stock/deleteTrader',
+  type: 'trader/deleteTrader',
   payload: params,
 });
 
 export const editTrader = params => ({
-  type: 'stock/editTrader',
+  type: 'trader/editTrader',
   payload: params,
 });

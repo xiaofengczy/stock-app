@@ -22,10 +22,6 @@ export default connect(() => {
     setTraderTine(dateString);
   }
 
-  function onInputChange(date, dateString) {
-    setInputDate(dateString);
-  }
-
   return (
     <Form
       layout="horizontal"
