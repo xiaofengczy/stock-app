@@ -21,10 +21,6 @@ export default connect(
   const { history, listStock, stockListLoading ,deleteStock} = props;
   const [ stockList, setStockList ] = useState();
 
-  function onAdd() {
-    history.push('/stock/add');
-  }
-
   function onSearch(params) {
     listStock(params).then(res => {
       let resData = res.data;
@@ -43,6 +39,10 @@ export default connect(
         }),
       );
     });
+  }
+
+  function onFinish(values) {
+    onSearch(values);
   }
 
   useEffect(() => {
@@ -89,7 +89,7 @@ export default connect(
       <Button type="primary" style={{ marginBottom: 24 }} onClick={onAdd}>
         新增
       </Button>
-      <Form layout="inline" className={styles['search-form']}>
+      <Form layout="inline" className={styles['search-form']} onFinish={onFinish}>
         <Form.Item
           label="股票名称"
           name="name"
