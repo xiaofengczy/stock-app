@@ -1,9 +1,9 @@
-import { Button, Form, Input, Space, Table } from 'antd';
+import { Space } from 'antd';
 
 const getColumnFields = ({ onEdit, onDetail, onDelete }) => {
   const base_column = [
     {
-      title: '名称',
+      title: '股票名字',
       dataIndex: 'name',
       key: 'name',
       width:'200px',

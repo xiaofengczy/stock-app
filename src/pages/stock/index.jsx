@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
-import { Button, Form, Input, Table ,Modal} from 'antd';
+import { Button, Form, Input, Table, Modal } from 'antd';
 import { connect } from 'dva';
-import { listStock,deleteStock } from '@action/stockAction';
+import { listStock, deleteStock } from '@action/stockAction';
 import * as moment from 'moment';
 import { getColumnFields } from '../stock/TableMethods';
 import { qsString } from '@utils/utils';
@@ -15,21 +15,32 @@ export default connect(
   }),
   {
     listStock,
-    deleteStock
+    deleteStock,
   },
 )(function Index(props) {
-  const { history, listStock, stockListLoading ,deleteStock} = props;
-  const [ stockList, setStockList ] = useState();
+  const { history, listStock, stockListLoading, deleteStock } = props;
+  const [stockList, setStockList] = useState();
+  const [pagination, setPagination] = useState({});
 
   function onSearch(params) {
     listStock(params).then(res => {
-      let resData = res.data;
+      setPagination({
+        current: Number(res.data.page) || 1,
+        pageSize: Number(res.data.pageSize) || 10,
+        total: Number(res.data.total) || 0,
+        showQuickJumper: false,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '30', '40', '50'],
+        showTotal: total => `共有${total}条`,
+      });
+
+      let resData = res.data.stockList;
       setStockList(
         resData &&
         resData.map(data => {
           return {
-            key:data.id,
-            id:data.id,
+            key: data.id,
+            id: data.id,
             name: data.name,
             code: data.code,
             plate: data.plate,
@@ -76,9 +87,18 @@ export default connect(
       okType: 'danger',
       cancelText: '取消',
       onOk() {
-        deleteStock(id).then(() => onSearch({}));;
+        deleteStock(id).then(() => onSearch({}));
+        ;
       },
     });
+  };
+
+  function onPageChange(params) {
+    let param = {
+      page:params.current,
+      pageSize:params.pageSize,
+    };
+    onSearch(param);
   };
 
   return (
@@ -117,6 +137,8 @@ export default connect(
         columns={getColumnFields({ onEdit, onDetail, onDelete })}
         dataSource={stockList}
         style={{ marginTop: '30px' }}
+        pagination={pagination}
+        onChange={onPageChange}
         loading={stockListLoading}
       />
     </div>

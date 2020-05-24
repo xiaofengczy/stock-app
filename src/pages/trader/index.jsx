@@ -10,7 +10,7 @@ import * as moment from 'moment';
 const { confirm } = Modal;
 
 export default connect(({ loading }) => ({
-    traderListLoading: loading.effects['stock/listTrader'],
+    traderListLoading: loading.effects['trader/listTrader'],
   }),
   {
     listTrader,
@@ -20,13 +20,24 @@ export default connect(({ loading }) => ({
   const { history, listTrader, deleteTrader, traderListLoading } = props;
   const [tableData, setTableData] = useState();
   const [traderTime, setTraderTime] = useState();
+  const [pagination, setPagination] = useState({});
 
   function onSearch(params) {
     listTrader(params).then(res => {
       let resData = res.data;
+      setPagination({
+        current: Number(res.data.page) || 1,
+        pageSize: Number(res.data.pageSize) || 10,
+        total: Number(res.data.total) || 0,
+        showQuickJumper: false,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '30', '40', '50'],
+        showTotal: total => `共有${total}条`,
+      });
+      let restList = resData.traderList;
       setTableData(
-        resData &&
-        resData.map(data => {
+        restList &&
+        restList.map(data => {
           return {
             title: data.title,
             key: data.id,
@@ -87,6 +98,14 @@ export default connect(({ loading }) => ({
     setTraderTime(dateString);
   }
 
+  function onPageChange(params) {
+    let param = {
+      page:params.current,
+      pageSize:params.pageSize,
+    };
+    onSearch(param);
+  };
+
   return (
     <div
       className={styles['site-layout-background']}
@@ -118,6 +137,8 @@ export default connect(({ loading }) => ({
         dataSource={tableData}
         style={{ marginTop: '30px' }}
         loading={traderListLoading}
+        pagination={pagination}
+        onChange={onPageChange}
       />
     </div>
   );

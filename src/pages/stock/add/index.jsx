@@ -21,7 +21,7 @@ export default connect(() => {
       onFinish={onFinish}
     >
       <Form.Item
-        label="名字代码"
+        label="股票名字"
         name="name"
         className={styles['search-style']}
         colon={true}
@@ -34,7 +34,7 @@ export default connect(() => {
         name="code"
         className={styles['search-style']}
         colon={true}
-        rules={[{ required: true, message: '股票代码不能为空' }]}
+        rules={[{ required: true, message: '股票代码只能为数字', pattern: new RegExp(/^[1-9]\d*$/, 'g') }]}
       >
         <Input className={styles['time-input']} maxLength={6}/>
       </Form.Item>
