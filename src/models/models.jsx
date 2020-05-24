@@ -24,8 +24,8 @@ export default modelExtend(basicModel, {
       return rest;
     },
 
-    *getStock(action, { call, put }) {
-      const rest = yield call(stockService.getStock, action.payload);
+    *getTrader(action, { call, put }) {
+      const rest = yield call(stockService.getTrader, action.payload);
       return rest;
     },
 
@@ -34,8 +34,8 @@ export default modelExtend(basicModel, {
       return rest;
     },
 
-    *editStock(action, { call, put }) {
-      const rest = yield call(stockService.editStock, action.payload);
+    *editTrader(action, { call, put }) {
+      const rest = yield call(stockService.editTrader, action.payload);
       return rest;
     },
   },

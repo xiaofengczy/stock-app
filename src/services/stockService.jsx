@@ -16,16 +16,16 @@ export async function listTrader(params) {
 }
 
 //获取今日操盘
-export async function getStock(params) {
-  return await get(`/getStock/` + params['id'], {});
+export async function getTrader(params) {
+  return await get(`/getTrader/` + params['id'], {});
 }
 
 //删除今日操盘
 export async function deleteTrader(params) {
-  return await del(`/delStock/` + params, {});
+  return await del(`/delTrader/` + params, {});
 }
 
 //编辑今日操盘
-export async function editStock(params) {
-  return await post(`/editStock`, params);
+export async function editTrader(params) {
+  return await post(`/editTrader`, params);
 }

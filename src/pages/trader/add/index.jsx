@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../index.less';
-import { Button, Form, Input, Space, Table, DatePicker } from 'antd';
+import { Button, Form, Input, DatePicker } from 'antd';
 import { connect } from 'dva';
 import { addTrader } from '@action/stockAction';
 

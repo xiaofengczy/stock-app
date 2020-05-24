@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../index.less';
-import { Button, Form, Input, Space, Table, DatePicker } from 'antd';
+import { Button, Form, Input, DatePicker } from 'antd';
 import { connect } from 'dva';
-import { getStock, editStock } from '@action/stockAction';
+import { getTrader, editTrader } from '@action/stockAction';
 import { qsParse } from '@utils/utils';
 import * as moment from 'moment';
 
 export default connect((loading) => {
   loading;
 }, {
-  getStock,
-  editStock,
+  getTrader,
+  editTrader,
 })(function Index(props) {
   const [inputDate, setInputDate] = useState();
   const [traderTime, setTraderTime] = useState();
-  const { getStock, editStock } = props;
+  const { getTrader, editTrader } = props;
   const query = qsParse(props) || {};
   const { id = null } = query;
-  const [stockDetail, setStockDetail] = useState({});
   const [form] = Form.useForm();
 
   useEffect(() => {
     let params = { id: id };
-    getStock(params).then(resp => {
+    getTrader(params).then(resp => {
       let data = resp.data;
       form.setFieldsValue({
         title: data['title'],
@@ -40,7 +39,7 @@ export default connect((loading) => {
     values['inputTime'] = inputDate;
     values['traderId'] = id;
     setTraderTime(undefined);
-    editStock(values).then(props.history.push('/trader'));
+    editTrader(values).then(props.history.push('/trader'));
   }
 
   function onTraderChange(date, dateString) {

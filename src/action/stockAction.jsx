@@ -15,8 +15,8 @@ export const listTrader = params => ({
   payload: params,
 });
 
-export const getStock = params => ({
-  type: 'stock/getStock',
+export const getTrader = params => ({
+  type: 'stock/getTrader',
   payload: params,
 });
 
@@ -25,7 +25,7 @@ export const deleteTrader = params => ({
   payload: params,
 });
 
-export const editStock = params => ({
-  type: 'stock/editStock',
+export const editTrader = params => ({
+  type: 'stock/editTrader',
   payload: params,
 });

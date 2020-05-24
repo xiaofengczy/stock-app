@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import { connect } from 'dva';
-import { getStock } from '@action/stockAction';
+import { getTrader } from '@action/stockAction';
 import { qsParse } from '@utils/utils';
 import * as moment from 'moment';
 import {
@@ -18,18 +18,18 @@ export default connect(
     loading;
   },
   {
-    getStock,
+    getTrader,
   },
 )
 (function Index(props) {
-  const { getStock } = props;
+  const { getTrader } = props;
   const query = qsParse(props) || {};
   const { id = null } = query;
   const [stockDetail, setStockDetail] = useState({});
   const [traderTime,setTraderTme] = useState();
   useEffect(() => {
     let params = { id: id };
-    getStock(params).then(resp => {
+    getTrader(params).then(resp => {
       setStockDetail(resp.data);
       setTraderTme(moment(resp.data['traderTime']).format('YYYY-MM-DD').toString())
     });
