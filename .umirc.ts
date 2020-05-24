@@ -22,8 +22,8 @@ export default defineConfig({
           title: '股票池',
         },
         {
-          path: '/eventdriven',
-          component: 'eventdriven',
+          path: '/event',
+          component: 'event',
           title: '事件驱动',
         },
         {
@@ -55,6 +55,21 @@ export default defineConfig({
           path: '/stock/detail',
           component: 'stock/detail',
           title: '股票详情',
+        },
+        {
+          path: '/event/add',
+          component: 'event/add',
+          title: '新增事件',
+        },
+        {
+          path: '/event/edit',
+          component: 'event/edit',
+          title: '事件编辑',
+        },
+        {
+          path: '/event/detail',
+          component: 'event/detail',
+          title: '事件详情',
         },
       ],
     },

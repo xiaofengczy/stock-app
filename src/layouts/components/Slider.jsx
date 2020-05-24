@@ -21,7 +21,7 @@ function Slider(props) {
           <Link to={{ pathname: '/stock' }}>股票池</Link>
         </Menu.Item>
         <Menu.Item key="eventdriven" icon={<AppstoreOutlined />}>
-          <Link to={{ pathname: '/eventdriven' }}>事件驱动</Link>
+          <Link to={{ pathname: '/event' }}>事件驱动</Link>
         </Menu.Item>
       </Menu>
     </Layout.Sider>
