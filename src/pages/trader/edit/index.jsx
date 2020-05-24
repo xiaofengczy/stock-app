@@ -36,7 +36,7 @@ export default connect((loading) => {
   }, []);
 
   function onFinish(values) {
-    values['traderTime'] = traderTime ? traderTime : moment(values['traderTime']).format('YYYY-MM-dd');
+    values['traderTime'] = traderTime ? traderTime : moment(values['traderTime']).format("YYYY-MM-DD").toString();
     values['inputTime'] = inputDate;
     values['traderId'] = id;
     setTraderTime(undefined);

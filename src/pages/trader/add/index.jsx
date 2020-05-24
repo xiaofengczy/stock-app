@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../index.less';
 import { Button, Form, Input, Space, Table, DatePicker } from 'antd';
-import moment from 'moment';
 import { connect } from 'dva';
 import { addTrader } from '@action/stockAction';
 

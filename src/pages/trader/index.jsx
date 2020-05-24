@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import styles from './index.less';
-import { Button, Form, Input, Space, Table, Modal } from 'antd';
+import { Button, Form, Input, Space, Table, Modal, DatePicker } from 'antd';
 import { connect } from 'dva';
 import { listTrader, deleteTrader } from '@action/stockAction';
 import { getColumnFields } from './TableMethods';
@@ -20,10 +20,10 @@ export default connect(
 )(function Trader(props) {
   const { history, listTrader, deleteTrader, traderListLoading } = props;
   const [tableData, setTableData] = useState();
-  const [status, setStatus] = useState(false);
+  const [traderTime, setTraderTime] = useState();
 
-  function onSearch(){
-    listTrader({}).then(res => {
+  function onSearch(params) {
+    listTrader(params).then(res => {
       let resData = res.data;
       setTableData(
         resData &&
@@ -43,7 +43,7 @@ export default connect(
   }
 
   useEffect(() => {
-    onSearch();
+    onSearch({});
   }, []);
 
   function onAdd() {
@@ -73,11 +73,20 @@ export default connect(
       okType: 'danger',
       cancelText: '取消',
       onOk() {
-        deleteTrader(key).then(()=>onSearch());
+        deleteTrader(key).then(() => onSearch({}));
         ;
       },
     });
   };
+
+  function onFinish(values) {
+    values['traderDate'] = traderTime;
+    onSearch(values);
+  }
+
+  function onTraderChange(date, dateString) {
+    setTraderTime(dateString);
+  }
 
   return (
     <div
@@ -87,14 +96,16 @@ export default connect(
       <Button type="primary" style={{ marginBottom: 24 }} onClick={onAdd}>
         新增
       </Button>
-      <Form layout="inline" className={styles['search-form']}>
+      <Form layout="inline" className={styles['search-form']} onFinish={onFinish}>
         <Form.Item
           label="操盘时间"
-          name="traderTime"
-          className={styles['search-style']}
-          colon={false}
+          name="traderDate"
+          colon={true}
         >
-          <Input/>
+          <DatePicker
+            format="YYYY-MM-DD"
+            onChange={onTraderChange}
+          />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -103,7 +114,7 @@ export default connect(
         </Form.Item>
       </Form>
       <Table
-        className={"table-style"}
+        className={'table-style'}
         columns={getColumnFields({ onEdit, onDetail, onDelete })}
         dataSource={tableData}
         style={{ marginTop: '30px' }}
