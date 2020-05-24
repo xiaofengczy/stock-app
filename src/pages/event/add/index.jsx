@@ -3,14 +3,15 @@ import styles from '../index.less';
 import { Button, Form, Input, DatePicker } from 'antd';
 import { connect } from 'dva';
 import { addEvent } from '@action/eventAction';
+import * as moment from 'moment';
 
 export default connect(() => {
 }, {
   addEvent,
 })(function Index(props) {
   const { addEvent } = props;
-
   function onFinish(values) {
+    values['eventTime'] = moment(new Date).format("YYYY-MM-DD").toString();
     addEvent(values).then(props.history.push('/event'));
   }
 

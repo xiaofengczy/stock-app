@@ -23,6 +23,7 @@ export default connect(({ loading }) => ({
   const [pagination, setPagination] = useState({});
 
   function onSearch(params) {
+    params['createTime'] = createTime;
     listEvent(params).then(res => {
       let resData = res.data;
       setPagination({
