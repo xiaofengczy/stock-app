@@ -9,7 +9,7 @@ pipeline {
     }
 
     tools {
-        nodejs 'NodeJS 10.5.0'
+        nodejs 'NodeJS 12.16.3'
     }
 
     stages {

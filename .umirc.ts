@@ -77,7 +77,7 @@ export default defineConfig({
   proxy: {
     '/stock-service': {
       changeOrigin: true,
-      target: 'http://localhost:8088',
+      target: 'http://148.70.30.245:8088',
     },
   },
   alias: {
