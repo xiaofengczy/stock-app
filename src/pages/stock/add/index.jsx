@@ -4,8 +4,7 @@ import { Button, Form, Input } from 'antd';
 import { connect } from 'dva';
 import { addStock } from '@action/stockAction';
 
-export default connect(() => {
-}, {
+export default connect(() => {}, {
   addStock,
 })(function Index(props) {
   const { addStock } = props;
@@ -27,16 +26,16 @@ export default connect(() => {
         colon={true}
         rules={[{ required: true, message: '名字不能为空' }]}
       >
-        <Input className={styles['time-input']} maxLength={30}/>
+        <Input className={styles['time-input']} maxLength={30} />
       </Form.Item>
       <Form.Item
         label="股票代码"
         name="code"
         className={styles['search-style']}
         colon={true}
-        rules={[{ required: true, message: '股票代码只能为数字', pattern: new RegExp(/^[1-9]\d*$/, 'g') }]}
+        rules={[{ required: true, message: '股票代码只能为数字' }]}
       >
-        <Input className={styles['time-input']} maxLength={6}/>
+        <Input className={styles['time-input']} maxLength={6} />
       </Form.Item>
       <Form.Item
         label="所属板块"
@@ -45,7 +44,7 @@ export default connect(() => {
         colon={true}
         rules={[{ required: true, message: '所属板块不能为空' }]}
       >
-        <Input className={styles['time-input']} maxLength={30}/>
+        <Input className={styles['time-input']} maxLength={30} />
       </Form.Item>
       <Form.Item
         label="股性分析"
@@ -54,7 +53,7 @@ export default connect(() => {
         colon={true}
         rules={[{ required: true, message: '内容不能为空' }]}
       >
-        <Input.TextArea className={styles['trader-area']}/>
+        <Input.TextArea className={styles['trader-area']} />
       </Form.Item>
       <Form.Item className={styles['trader-button']}>
         <Button type="primary" htmlType="submit">
