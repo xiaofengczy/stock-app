@@ -9,7 +9,8 @@ import * as moment from 'moment';
 
 const { confirm } = Modal;
 
-export default connect(({ loading }) => ({
+export default connect(
+  ({ loading }) => ({
     traderListLoading: loading.effects['trader/listTrader'],
   }),
   {
@@ -37,17 +38,17 @@ export default connect(({ loading }) => ({
       let restList = resData.traderList;
       setTableData(
         restList &&
-        restList.map(data => {
-          return {
-            title: data.title,
-            key: data.id,
-            traderTime: moment(data.traderTime).format('YYYY-MM-DD'),
-            inputTime: data.inputTime
-              ? moment(data.inputTime).format('YYYY-MM-DD')
-              : null,
-            marketAnalysis: data.marketAnalysis,
-          };
-        }),
+          restList.map(data => {
+            return {
+              title: data.title,
+              key: data.id,
+              traderTime: moment(data.traderTime).format('YYYY-MM-DD'),
+              inputTime: data.inputTime
+                ? moment(data.inputTime).format('YYYY-MM-DD')
+                : null,
+              marketAnalysis: data.marketAnalysis,
+            };
+          }),
       );
     });
   }
@@ -84,7 +85,6 @@ export default connect(({ loading }) => ({
       cancelText: '取消',
       onOk() {
         deleteTrader(key).then(() => onSearch({}));
-        ;
       },
     });
   };
@@ -100,11 +100,11 @@ export default connect(({ loading }) => ({
 
   function onPageChange(params) {
     let param = {
-      page:params.current,
-      pageSize:params.pageSize,
+      page: params.current,
+      pageSize: params.pageSize,
     };
     onSearch(param);
-  };
+  }
 
   return (
     <div
@@ -114,16 +114,13 @@ export default connect(({ loading }) => ({
       <Button type="primary" style={{ marginBottom: 24 }} onClick={onAdd}>
         新增
       </Button>
-      <Form layout="inline" className={styles['search-form']} onFinish={onFinish}>
-        <Form.Item
-          label="操盘时间"
-          name="traderDate"
-          colon={true}
-        >
-          <DatePicker
-            format="YYYY-MM-DD"
-            onChange={onTraderChange}
-          />
+      <Form
+        layout="inline"
+        className={styles['search-form']}
+        onFinish={onFinish}
+      >
+        <Form.Item label="操盘时间" name="traderDate" colon={true}>
+          <DatePicker format="YYYY-MM-DD" onChange={onTraderChange} />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -132,7 +129,7 @@ export default connect(({ loading }) => ({
         </Form.Item>
       </Form>
       <Table
-        className={'table-style'}
+        className={styles['table-style']}
         columns={getColumnFields({ onEdit, onDetail, onDelete })}
         dataSource={tableData}
         style={{ marginTop: '30px' }}
