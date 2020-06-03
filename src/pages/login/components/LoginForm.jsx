@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import styles from './index.less';
 import { Form, Input, Select, Button } from 'antd';
+import {
+  UserOutlined,
+  LockOutlined,
+  CheckCircleOutlined,
+} from '@ant-design/icons';
 
 const { Option } = Select;
 
@@ -58,7 +63,6 @@ export default () => {
     >
       <Form.Item
         name="username"
-        label="用户名"
         rules={[
           {
             required: true,
@@ -66,12 +70,11 @@ export default () => {
           },
         ]}
       >
-        <Input />
+        <Input prefix={<UserOutlined />} placeholder="用户名" />
       </Form.Item>
 
       <Form.Item
         name="password"
-        label="密&nbsp;&nbsp;&nbsp;&nbsp;码"
         rules={[
           {
             required: true,
@@ -79,11 +82,10 @@ export default () => {
           },
         ]}
       >
-        <Input.Password />
+        <Input.Password prefix={<LockOutlined />} placeholder="密码" />
       </Form.Item>
 
       <Form.Item
-        label="验证码"
         className={styles['captcha']}
         rules={[
           {
@@ -97,15 +99,13 @@ export default () => {
           noStyle
           rules={[{ required: true, message: '验证码不能为空' }]}
         >
-          <Input />
+          <Input prefix={<CheckCircleOutlined />} placeholder="验证码" />
           <img className={styles['captcha-img']} />
         </Form.Item>
       </Form.Item>
-      <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          登录
-        </Button>
-      </Form.Item>
+      <Button type="primary" htmlType="submit">
+        登录
+      </Button>
     </Form>
   );
 };

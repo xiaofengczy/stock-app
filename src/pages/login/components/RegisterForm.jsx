@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import styles from './index.less';
 import { Form, Input, Select, Button } from 'antd';
+import {
+  UserOutlined,
+  LockOutlined,
+  CheckCircleOutlined,
+} from '@ant-design/icons';
 
 const { Option } = Select;
 
@@ -44,90 +49,85 @@ export default () => {
   );
 
   return (
-    <Form
-      className={styles['content-form']}
-      {...formItemLayout}
-      form={form}
-      name="register"
-      onFinish={onFinish}
-      initialValues={{
-        residence: ['zhejiang', 'hangzhou', 'xihu'],
-        prefix: '86',
-      }}
-      scrollToFirstError
-    >
-      <Form.Item
-        name="username"
-        label="用户名"
-        rules={[
-          {
-            required: true,
-            message: '用户名不能为空',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="password"
-        label="密&nbsp;&nbsp;&nbsp;&nbsp;码"
-        rules={[
-          {
-            required: true,
-            message: '密码不能为空',
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item
-        name="confirmPassword"
-        label="确认密码"
-        dependencies={['password']}
-        rules={[
-          {
-            required: true,
-            message: '确认密码不能为空',
-          },
-          ({ getFieldValue }) => ({
-            validator(rule, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject('两次密码不匹配');
-            },
-          }),
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item
-        label="验证码"
-        className={styles['captcha']}
-        rules={[
-          {
-            required: true,
-            message: '确认密码不能为空',
-          },
-        ]}
+    <div className={styles['content-form']}>
+      <Form
+        {...formItemLayout}
+        form={form}
+        name="register"
+        onFinish={onFinish}
+        initialValues={{
+          residence: ['zhejiang', 'hangzhou', 'xihu'],
+          prefix: '86',
+        }}
+        scrollToFirstError
       >
         <Form.Item
-          name="captcha"
-          noStyle
-          rules={[{ required: true, message: '验证码不能为空' }]}
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: '用户名不能为空',
+            },
+          ]}
         >
-          <Input />
-          <img className={styles['captcha-img']} />
+          <Input prefix={<UserOutlined />} placeholder="用户名" />
         </Form.Item>
-      </Form.Item>
-      <Form.Item {...tailFormItemLayout}>
+
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: '密码不能为空',
+            },
+          ]}
+        >
+          <Input.Password prefix={<LockOutlined />} placeholder="密码" />
+        </Form.Item>
+
+        <Form.Item
+          name="confirmPassword"
+          dependencies={['password']}
+          rules={[
+            {
+              required: true,
+              message: '确认密码不能为空',
+            },
+            ({ getFieldValue }) => ({
+              validator(rule, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject('两次密码不匹配');
+              },
+            }),
+          ]}
+        >
+          <Input.Password prefix={<LockOutlined />} placeholder="确认密码" />
+        </Form.Item>
+
+        <Form.Item
+          className={styles['captcha']}
+          rules={[
+            {
+              required: true,
+              message: '确认密码不能为空',
+            },
+          ]}
+        >
+          <Form.Item
+            name="captcha"
+            noStyle
+            rules={[{ required: true, message: '验证码不能为空' }]}
+          >
+            <Input prefix={<CheckCircleOutlined />} placeholder="验证码" />
+            <img className={styles['captcha-img']} />
+          </Form.Item>
+        </Form.Item>
         <Button type="primary" htmlType="submit">
           注册
         </Button>
-      </Form.Item>
-    </Form>
+      </Form>
+    </div>
   );
 };

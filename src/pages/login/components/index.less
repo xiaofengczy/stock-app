@@ -1,15 +1,31 @@
 .content-form {
   border: 1px solid #cccccc;
-  padding: 10px;
+
+  padding: 30px;
   :global {
-    .ant-form-item {
-      margin-bottom: 12px;
-    }
     .ant-form-item-control {
-      margin-left: 20px !important;
     }
+
     .ant-btn-primary {
-      width: 200px;
+      width: 100%;
+      margin-top: 30px;
+      font-size: 20px;
+      line-height: 20px;
+      height: 50px;
+    }
+
+    .ant-form-item-label > label {
+      color: #ffffff;
+    }
+    .ant-form-item-control-input {
+      width: 300px !important;
+    }
+    .ant-input-affix-wrapper > input.ant-input {
+      height: 36px;
+      font-size: 12px;
+    }
+    .ant-input-prefix {
+      color: #cccccc;
     }
   }
   .captcha {

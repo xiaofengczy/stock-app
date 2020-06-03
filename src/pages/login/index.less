@@ -1,19 +1,44 @@
+.bg {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center 0;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+}
 .login-register-form {
-  width: 300px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 20px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+  width: 400px;
   padding: 20px;
-  background-color: #cccccc;
-  opacity: 0.5;
+  margin: 0 auto;
   .header-item {
     display: flex;
     margin-bottom: 20px;
     div {
       border-bottom: 1px solid blue;
-      width: 120px;
+      width: 160px;
       text-align: center;
       padding: 10px;
     }
     .login-item {
-      margin-right: 60px;
+      margin-right: 80px;
     }
   }
 }
