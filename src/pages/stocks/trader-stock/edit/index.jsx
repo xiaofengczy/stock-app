@@ -46,7 +46,7 @@ export default connect(
     values['inputTime'] = inputDate;
     values['traderId'] = id;
     setTraderTime(undefined);
-    editTrader(values).then(props.history.push('/trader'));
+    editTrader(values).then(props.history.push('/stocks/trader-stock'));
   }
 
   function onTraderChange(date, dateString) {

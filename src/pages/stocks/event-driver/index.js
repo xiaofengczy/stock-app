@@ -64,6 +64,7 @@ export default connect(
     let params = {
       id: record.key,
     };
+    console.log(record);
     return history.push(`/stocks/event-driver/edit?${qsString(params)}`);
   }
 

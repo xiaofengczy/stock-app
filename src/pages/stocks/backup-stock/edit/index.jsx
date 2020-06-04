@@ -34,7 +34,7 @@ export default connect(
 
   function onFinish(values) {
     values['stockId'] = id;
-    editStock(values).then(props.history.push('/stock'));
+    editStock(values).then(props.history.push('/stocks/backup-stock'));
   }
 
   return (

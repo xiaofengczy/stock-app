@@ -1,10 +1,8 @@
 import React, { useState, useRef } from 'react';
 import styles from './index.less';
-import LoginFrom from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import loginBg from '@assets/login-bg.jpg';
 import LoginForm from './components/LoginForm';
-import { render } from 'react-dom';
 
 const borderBottom = '2px solid #ffffff';
 

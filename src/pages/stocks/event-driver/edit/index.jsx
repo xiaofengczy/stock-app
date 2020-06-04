@@ -4,6 +4,7 @@ import { Button, Form, Input } from 'antd';
 import { connect } from 'dva';
 import { getEvent, editEvent } from '@action/eventAction';
 import { qsParse } from '@utils/utils';
+import * as moment from 'moment';
 
 export default connect(
   ({ loading }) => ({
@@ -32,6 +33,8 @@ export default connect(
   }, []);
 
   function onFinish(values) {
+    values['eventId'] = id;
+    values['eventTime'] = moment(new Date()).format('YYYY-MM-DD');
     editEvent(values).then(props.history.push('/stocks/event-driver'));
   }
 

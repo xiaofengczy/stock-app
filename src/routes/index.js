@@ -7,7 +7,7 @@ export default {
       routes: [
         {
           path: '/stocks/trader-stock',
-          component: 'trader-stock',
+          component: '/stocks/trader-stock',
           title: '今日操盘',
         },
         {

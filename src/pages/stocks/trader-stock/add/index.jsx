@@ -14,7 +14,7 @@ export default connect(() => {}, {
   function onFinish(values) {
     values['inputTime'] = inputDate;
     values['traderTime'] = traderTime;
-    addTrader(values).then(props.history.push('/trader'));
+    addTrader(values).then(props.history.push('/stocks/trader-stock'));
   }
 
   function onTraderChange(date, dateString) {

@@ -10,7 +10,7 @@ export default connect(() => {}, {
   const { addStock } = props;
 
   function onFinish(values) {
-    addStock(values).then(props.history.push('/stock'));
+    addStock(values).then(props.history.push('/stocks/backup-stock'));
   }
 
   return (
