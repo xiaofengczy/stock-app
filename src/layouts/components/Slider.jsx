@@ -15,13 +15,13 @@ function Slider(props) {
       <div className={styles['logo']} />
       <Menu theme="dark" mode="inline">
         <Menu.Item key="trader" icon={<PayCircleOutlined />}>
-          <Link to={{ pathname: '/trader' }}>今日操盘</Link>
+          <Link to={{ pathname: '/stocks/trader-stock' }}>今日操盘</Link>
         </Menu.Item>
         <Menu.Item key="stockpool" icon={<LineChartOutlined />}>
-          <Link to={{ pathname: '/stock' }}>股票池</Link>
+          <Link to={{ pathname: '/stocks/backup-stock' }}>股票池</Link>
         </Menu.Item>
         <Menu.Item key="eventdriven" icon={<AppstoreOutlined />}>
-          <Link to={{ pathname: '/event' }}>事件驱动</Link>
+          <Link to={{ pathname: '/stocks/event-driver' }}>事件驱动</Link>
         </Menu.Item>
       </Menu>
     </Layout.Sider>
